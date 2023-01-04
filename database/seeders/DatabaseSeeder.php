@@ -44,18 +44,22 @@ class DatabaseSeeder extends Seeder
         $series = [
             [
                 'name' => 'PHP',
+                'slug' => 'php',
                 'image' => 'https://laravel-courses.com/storage/series/c9cb9b3c-4d8c-4df6-a7b7-54047ce907ad.png'
             ],
             [
-                'name' => 'JavaScript',
+                'name' => 'javascript',
+                'slug' => 'JavaScript',
                 'image' => 'https://laravel-courses.com/storage/series/c9cb9b3c-4d8c-4df6-a7b7-54047ce907ad.png'
             ],
             [
-                'name' => 'WordPress',
+                'name' => 'wordpress',
+                'slug' => 'WordPress',
                 'image' => 'https://laravel-courses.com/storage/series/c9cb9b3c-4d8c-4df6-a7b7-54047ce907ad.png'
             ],
             [
-                'name' => 'Laravel',
+                'name' => 'Vue.Js',
+                'slug' => 'vuejs',
                 'image' => 'https://laravel-courses.com/storage/series/c9cb9b3c-4d8c-4df6-a7b7-54047ce907ad.png'
             ]
         ];
@@ -63,6 +67,7 @@ class DatabaseSeeder extends Seeder
             Series::create([
                 'name' => $item['name'],
                 'image' => $item['image'],
+                'slug' => $item['slug'],
             ]);
         }
 

@@ -28,21 +28,61 @@ class HomeController extends Controller
         }
     }
 
-    public function archive($archive_type, $slug){
+    public function archive($archive_type, $slug)
+    {
         $allowed_archive_type = ['series', 'duration', 'level', 'platform', 'topic'];
-        if(!in_array($archive_type, $allowed_archive_type)){
+        if (!in_array($archive_type, $allowed_archive_type)) {
             return abort(404);
         }
 
 
-    // duraton check
-        if($archive_type === 'duration'){
+        // duraton check
+        if ($archive_type === 'duration') {
             $allowed_duration = ['1-5 hours', '5-10 hours', '10+ hours'];
-            if(!in_array($slug, $allowed_duration)) {
+            if (!in_array($slug, $allowed_duration)) {
                 return abort(404);
             }
         }
 
-    }
+        // series check
 
+        if ($archive_type === 'series') {
+            $item = Series::where('slug', $slug)->first();
+
+            if (empty($item)) {
+                return abort(404);
+            }
+
+            $item = $item;
+            $courses = $item->courses()->paginate(12);
+        } elseif ($archive_type === 'duration') {
+
+            if ($slug == '1-5 hours') {
+                $item = '1-5 hours';
+                $duration_db_key = 0;
+            } elseif ($slug == '5-10 hours') {
+                $item = '5-10 hours';
+                $duration_db_key = 1;
+            } else {
+                $item = '10+ hours';
+                $duration_db_key = 2;
+            }
+
+            $courses = Course::where('duration', $duration_db_key)->paginate(12);
+        }
+
+        // level check
+        if ($archive_type === 'level') {
+            $allowed_level = ['Beginner', 'Intermediate', 'Advanced'];
+            if (!in_array($slug, $allowed_level)) {
+                return abort(404);
+            }
+        }
+
+
+        return view('archive.single', [
+            'item' => $item,
+            'courses' => $courses
+        ]);
+    }
 }
