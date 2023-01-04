@@ -22,10 +22,11 @@ Route::get('/',[HomeController::class,'index'])->name('home');
 
 Route::get('/course/{slug}', [CourseController::class,'show'])->name('course');
 Route::get('/{archive_type}/{slug}', [HomeController::class,'archive'])->name('archive');
+Route::get('/courses', [CourseController::class,'courses'])->name('courses');
 
 
 // todo controller pendding
-Route::get('/courses', [CourseController::class,'index'])->name('courses');
+// Route::get('/courses', [CourseController::class,'index'])->name('courses');
 
 
 Route::middleware('auth')->group(function () {

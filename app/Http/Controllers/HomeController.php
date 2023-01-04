@@ -53,7 +53,7 @@ class HomeController extends Controller
                 return abort(404);
             }
 
-            $item = $item;
+            $title ='Courses on '. $item->name;
             $courses = $item->courses()->paginate(12);
         } elseif ($archive_type === 'duration') {
 
@@ -68,6 +68,7 @@ class HomeController extends Controller
                 $duration_db_key = 2;
             }
 
+            $title = 'Courses with duration '. $item;
             $courses = Course::where('duration', $duration_db_key)->paginate(12);
         }
 
@@ -81,7 +82,7 @@ class HomeController extends Controller
 
 
         return view('archive.single', [
-            'item' => $item,
+            'title' => $title,
             'courses' => $courses
         ]);
     }

@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="bg-gray mt-1 py-6">
         <div class="container max-w-[919px]">
-            <h2 class="text-center font-bold text-2xl mb-6">Courses on {{ $item->name }}</h2>
+            <h2 class="text-center font-bold text-2xl mb-6">{{ $title}}</h2>
 
             <div class="max-w-7xl w-full inline-flex single-feature gap-10 flex-wrap mx-auto">
                 @foreach ($courses as $course)
