@@ -27,4 +27,22 @@ class HomeController extends Controller
             return redirect()->route('home');
         }
     }
+
+    public function archive($archive_type, $slug){
+        $allowed_archive_type = ['series', 'duration', 'level', 'platform', 'topic'];
+        if(!in_array($archive_type, $allowed_archive_type)){
+            return abort(404);
+        }
+
+
+    // duraton check
+        if($archive_type === 'duration'){
+            $allowed_duration = ['1-5 hours', '5-10 hours', '10+ hours'];
+            if(!in_array($slug, $allowed_duration)) {
+                return abort(404);
+            }
+        }
+
+    }
+
 }
